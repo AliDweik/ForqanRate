@@ -1,0 +1,205 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   Al-Furqan Quranic Center — Design System (Arabic / RTL first)
+   Palette derived from the center logo (teal + gold). All tokens are
+   semantic — swap primary/accent later to rebrand.
+   ========================================================================== */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --font-sans: "Tajawal", "Cairo", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Amiri", "Tajawal", serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-silver: var(--silver);
+  --color-bronze: var(--bronze);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 4%), 0 8px 24px -12px oklch(0.35 0.07 210 / 12%);
+  --shadow-elev: 0 2px 4px oklch(0 0 0 / 4%), 0 20px 40px -20px oklch(0.35 0.07 210 / 18%);
+  --shadow-gold: 0 10px 40px -12px oklch(0.78 0.14 85 / 45%);
+}
+
+:root {
+  --radius: 0.9rem;
+
+  --background: oklch(0.985 0.008 90);
+  --foreground: oklch(0.22 0.03 220);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.03 220);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.03 220);
+
+  /* Teal from the center's logo */
+  --primary: oklch(0.48 0.08 200);
+  --primary-foreground: oklch(0.99 0.005 90);
+  --primary-soft: oklch(0.93 0.03 200);
+
+  --secondary: oklch(0.96 0.015 200);
+  --secondary-foreground: oklch(0.30 0.05 210);
+
+  --muted: oklch(0.96 0.008 90);
+  --muted-foreground: oklch(0.50 0.02 220);
+
+  --accent: oklch(0.93 0.05 90);
+  --accent-foreground: oklch(0.30 0.05 210);
+
+  /* Gold accents from logo frame + calligraphy */
+  --gold: oklch(0.80 0.14 85);
+  --gold-foreground: oklch(0.25 0.05 60);
+  --silver: oklch(0.82 0.01 250);
+  --bronze: oklch(0.62 0.12 55);
+
+  --destructive: oklch(0.60 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.62 0.14 155);
+  --success-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.90 0.015 210);
+  --input: oklch(0.92 0.012 210);
+  --ring: oklch(0.55 0.08 200);
+
+  --chart-1: oklch(0.48 0.08 200);
+  --chart-2: oklch(0.80 0.14 85);
+  --chart-3: oklch(0.62 0.14 155);
+  --chart-4: oklch(0.62 0.12 55);
+  --chart-5: oklch(0.55 0.12 280);
+
+  --sidebar: oklch(0.99 0.005 90);
+  --sidebar-foreground: oklch(0.28 0.04 210);
+  --sidebar-primary: oklch(0.48 0.08 200);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.95 0.02 200);
+  --sidebar-accent-foreground: oklch(0.30 0.05 210);
+  --sidebar-border: oklch(0.90 0.015 210);
+  --sidebar-ring: oklch(0.55 0.08 200);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga";
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* Arabic numerals feel */
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* Islamic geometric background pattern — very subtle */
+@utility pattern-islamic {
+  background-image:
+    radial-gradient(circle at 20% 20%, oklch(0.48 0.08 200 / 4%) 0, transparent 40%),
+    radial-gradient(circle at 80% 80%, oklch(0.80 0.14 85 / 5%) 0, transparent 40%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23127a86' stroke-width='0.6' stroke-opacity='0.08'><path d='M40 4 L52 16 L64 16 L64 28 L76 40 L64 52 L64 64 L52 64 L40 76 L28 64 L16 64 L16 52 L4 40 L16 28 L16 16 L28 16 Z'/><circle cx='40' cy='40' r='10'/><path d='M40 30 L44 40 L40 50 L36 40 Z'/></g></svg>");
+  background-size: auto, auto, 80px 80px;
+}
+
+@utility gold-gradient {
+  background: linear-gradient(135deg, oklch(0.88 0.11 90) 0%, oklch(0.72 0.16 75) 50%, oklch(0.85 0.12 90) 100%);
+}
+
+@utility teal-gradient {
+  background: linear-gradient(135deg, oklch(0.55 0.08 200) 0%, oklch(0.38 0.07 210) 100%);
+}
+
+@utility card-elev {
+  background-color: var(--color-card);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-border);
+}
+
+@utility shimmer {
+  background: linear-gradient(90deg, transparent, oklch(1 0 0 / 30%), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@utility animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.80 0.14 85 / 30%); }
+  50% { box-shadow: 0 0 60px oklch(0.80 0.14 85 / 60%); }
+}
+
+@utility animate-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
