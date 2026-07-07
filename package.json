@@ -7,7 +7,7 @@
   "homepage": "https://AliDweik.github.io/ForqanRate",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "dev": "vite dev",
