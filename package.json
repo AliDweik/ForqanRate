@@ -1,11 +1,16 @@
 {
-  "name": "tanstack_start_ts",
+  "name": "ForqanRatingSystem",
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "version": "0.1.0",
+  "homepage": "https://AliDweik.github.io/ForqanRate",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "dev": "vite dev",
-    "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
