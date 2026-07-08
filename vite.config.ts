@@ -11,5 +11,8 @@ export default defineConfig({
     // Force TanStack Start to bundle strictly for the client side (SPA)
     // This bypasses the SSR server build and prevents the HTML input error
     compilationMode: "client-only",
+    router: {
+      basepath: "/ForqanRate",
+    },
   },
 });
