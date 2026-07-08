@@ -7,9 +7,17 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  vite: {
+    base: "/ForqanRate/",
+  },
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
+    // GitHub Pages is static-only, so build the app as a client bundle.
+    compilationMode: "client-only",
+    client: {
+      entry: "client.tsx",
+    },
+    router: {
+      basepath: "/ForqanRate",
+    },
   },
 });
