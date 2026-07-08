@@ -8,12 +8,14 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { Loader2 } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 import { useFirestoreData } from "@/lib/firestore-data";
+
+const appBase = import.meta.env.BASE_URL;
+const absoluteFromBase = (path: string) => `${appBase}${path}`.replace(/\/{2,}/g, "/");
 
 function NotFoundComponent() {
   return (
@@ -62,7 +64,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             إعادة المحاولة
           </button>
           <a
-            href="/"
+            href={appBase}
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
           >
             الرئيسية
@@ -95,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: absoluteFromBase("favicon.ico"), type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -126,31 +128,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const { ready, error } = useFirestoreData();
-
-  if (error) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-background px-4">
-        <div className="max-w-md text-center">
-          <h1 className="text-xl font-semibold">حدث خطأ ما</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            تعذر تحميل البيانات من Firestore. حاول التحديث بعد قليل.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!ready) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-background px-4">
-        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-          <Loader2 className="h-4 w-4 animate-spin text-primary" />
-          جارٍ تحميل البيانات...
-        </div>
-      </div>
-    );
-  }
+  useFirestoreData();
 
   return (
     <QueryClientProvider client={queryClient}>

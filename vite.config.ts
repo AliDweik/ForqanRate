@@ -7,6 +7,9 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  vite: {
+    base: "/ForqanRate/",
+  },
   tanstackStart: {
     // Force TanStack Start to bundle strictly for the client side (SPA)
     // This bypasses the SSR server build and prevents the HTML input error
