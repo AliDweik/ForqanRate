@@ -7,7 +7,6 @@ export const getRouter = () => {
 
   const router = createRouter({
     routeTree,
-    basepath: "/ForqanRate",
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
