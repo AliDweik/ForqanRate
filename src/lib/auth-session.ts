@@ -20,8 +20,22 @@ type ResolvedSession = {
   teacher: Teacher | null;
 };
 
+const FIREBASE_TIMEOUT_MS = 10_000;
+
+function withTimeout<T>(promise: Promise<T>, message: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<never>((_, reject) => {
+      window.setTimeout(() => reject(new Error(message)), FIREBASE_TIMEOUT_MS);
+    }),
+  ]);
+}
+
 async function resolveTeacherByEmail(email: string): Promise<Teacher | null> {
-  const snap = await getDocs(query(collection(db, "teachers"), where("email", "==", email)));
+  const snap = await withTimeout(
+    getDocs(query(collection(db, "teachers"), where("email", "==", email))),
+    "firestore-timeout",
+  );
   if (snap.empty) return null;
   const d = snap.docs[0];
   const data = d.data() as Teacher;
@@ -40,7 +54,10 @@ async function resolveSession(user: User): Promise<ResolvedSession | null> {
 }
 
 export async function signInAndResolve(email: string, password: string): Promise<ResolvedSession> {
-  const cred = await signInWithEmailAndPassword(auth, email, password);
+  const cred = await withTimeout(
+    signInWithEmailAndPassword(auth, email, password),
+    "auth-timeout",
+  );
   const resolved = await resolveSession(cred.user);
   if (!resolved) {
     await signOut(auth);
@@ -79,30 +96,55 @@ export function useAuthSession() {
     teacher: null,
   });
 
-  useEffect(
-    () =>
-      onAuthStateChanged(auth, async (user) => {
+  useEffect(() => {
+    let active = true;
+    const signedOut: AuthSession = { ready: true, user: null, role: null, teacher: null };
+    const timeout = window.setTimeout(() => {
+      if (active) setSession(signedOut);
+    }, FIREBASE_TIMEOUT_MS);
+
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      async (user) => {
         if (!user) {
-          setSession({ ready: true, user: null, role: null, teacher: null });
+          window.clearTimeout(timeout);
+          if (active) setSession(signedOut);
           return;
         }
 
-        const resolved = await resolveSession(user);
-        if (!resolved) {
-          await signOut(auth);
-          setSession({ ready: true, user: null, role: null, teacher: null });
-          return;
-        }
+        try {
+          const resolved = await resolveSession(user);
+          window.clearTimeout(timeout);
+          if (!active) return;
+          if (!resolved) {
+            setSession(signedOut);
+            void signOut(auth);
+            return;
+          }
 
-        setSession({
-          ready: true,
-          user,
-          role: resolved.role,
-          teacher: resolved.teacher,
-        });
-      }),
-    [],
-  );
+          setSession({
+            ready: true,
+            user,
+            role: resolved.role,
+            teacher: resolved.teacher,
+          });
+        } catch {
+          window.clearTimeout(timeout);
+          if (active) setSession(signedOut);
+        }
+      },
+      () => {
+        window.clearTimeout(timeout);
+        if (active) setSession(signedOut);
+      },
+    );
+
+    return () => {
+      active = false;
+      window.clearTimeout(timeout);
+      unsubscribe();
+    };
+  }, []);
 
   return session;
 }

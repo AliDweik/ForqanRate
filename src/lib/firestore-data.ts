@@ -241,6 +241,14 @@ export function startFirestoreData() {
     },
     normalizeRating,
   );
+
+  window.setTimeout(() => {
+    if (loadedCollections.size === 5) return;
+    ["standards", "teachers", "classes", "students", "ratings"].forEach((name) =>
+      loadedCollections.add(name),
+    );
+    emit();
+  }, 10_000);
 }
 
 export function useFirestoreData() {
