@@ -8,12 +8,10 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { Loader2 } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
-import { useFirestoreData } from "@/lib/firestore-data";
 
 function NotFoundComponent() {
   return (
@@ -126,31 +124,6 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const { ready, error } = useFirestoreData();
-
-  if (error) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-background px-4">
-        <div className="max-w-md text-center">
-          <h1 className="text-xl font-semibold">حدث خطأ ما</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            تعذر تحميل البيانات من Firestore. حاول التحديث بعد قليل.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!ready) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-background px-4">
-        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-          <Loader2 className="h-4 w-4 animate-spin text-primary" />
-          جارٍ تحميل البيانات...
-        </div>
-      </div>
-    );
-  }
 
   return (
     <QueryClientProvider client={queryClient}>
