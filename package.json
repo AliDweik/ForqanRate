@@ -3,11 +3,9 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "homepage": "https://AliDweik.github.io/ForqanRate",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "build:pages": "npm run build && node scripts/prepare-github-pages.mjs",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
