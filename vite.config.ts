@@ -6,9 +6,15 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+const githubPagesBase = (() => {
+  const envBase = process.env.GITHUB_PAGES_BASE?.trim();
+  if (envBase) return `/${envBase.replace(/^\/+|\/+$/g, "")}`;
+  return "/ForqanRate";
+})();
+
 export default defineConfig({
   vite: {
-    base: "/ForqanRate/",
+    base: `${githubPagesBase}/`,
   },
   tanstackStart: {
     // GitHub Pages is static-only, so build the app as a client bundle.
@@ -17,7 +23,7 @@ export default defineConfig({
       entry: "client.tsx",
     },
     router: {
-      basepath: "/ForqanRate",
+      basepath: githubPagesBase,
     },
   },
 });

@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { withAppBase } from "@/lib/deployment";
 
 function NotFoundComponent() {
   return (
@@ -60,7 +61,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             إعادة المحاولة
           </button>
           <a
-            href="/"
+            href={withAppBase("/")}
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
           >
             الرئيسية
@@ -93,7 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: withAppBase("/favicon.ico"), type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,

@@ -6,6 +6,46 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
 });
 
+const LOGIN_MODULE_TIMEOUT_MS = 12_000;
+
+function withTimeout<T>(promise: Promise<T>, message: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<never>((_, reject) => {
+      window.setTimeout(() => reject(new Error(message)), LOGIN_MODULE_TIMEOUT_MS);
+    }),
+  ]);
+}
+
+function getLoginErrorMessage(error: unknown) {
+  const code =
+    error && typeof error === "object" && "code" in error
+      ? String((error as { code?: unknown }).code)
+      : "";
+  const message = error instanceof Error ? error.message : "";
+
+  if (
+    message === "login-module-timeout" ||
+    message.includes("Failed to fetch dynamically imported module")
+  ) {
+    return "تعذر تحميل خدمة تسجيل الدخول. حدّث الصفحة وتأكد من اتصال الإنترنت.";
+  }
+
+  if (code === "auth/unauthorized-domain") {
+    return "نطاق GitHub Pages غير مصرح به في Firebase. أضف alidweik.github.io إلى Authorized domains.";
+  }
+
+  if (
+    code === "auth/network-request-failed" ||
+    message === "auth-timeout" ||
+    message === "firestore-timeout"
+  ) {
+    return "تعذر الاتصال بخدمة تسجيل الدخول. تحقق من الإنترنت وحاول مرة أخرى.";
+  }
+
+  return "البريد الإلكتروني أو كلمة المرور غير صحيحة";
+}
+
 function LoginPage() {
   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -42,11 +82,14 @@ function LoginPage() {
                   const form = new FormData(e.currentTarget);
                   const email = String(form.get("forqan_user") ?? "").trim();
                   const password = String(form.get("forqan_pass") ?? "");
-                  const { signInAndResolve } = await import("@/lib/auth-session");
-                  const resolved = await signInAndResolve(email.trim(), password);
+                  const { signInAndResolve } = await withTimeout(
+                    import("@/lib/auth-session"),
+                    "login-module-timeout",
+                  );
+                  const resolved = await signInAndResolve(email, password);
                   nav({ to: resolved.role === "admin" ? "/admin" : "/teacher" });
-                } catch {
-                  setErrorMessage("البريد الإلكتروني أو كلمة المرور غير صحيحة");
+                } catch (error) {
+                  setErrorMessage(getLoginErrorMessage(error));
                 } finally {
                   setLoading(false);
                 }
