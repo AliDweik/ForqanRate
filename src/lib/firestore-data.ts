@@ -3,7 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
-  onSnapshot,
+  getDocs,
   setDoc,
   type FirestoreError,
 } from "firebase/firestore";
@@ -81,7 +81,8 @@ type FirestoreDataSnapshot = {
   error: FirestoreError | null;
 };
 
-let subscribeStarted = false;
+let loadStarted = false;
+let loadPromise: Promise<void> | null = null;
 let lastError: FirestoreError | null = null;
 const loadedCollections = new Set<string>();
 const listeners = new Set<() => void>();
@@ -176,79 +177,84 @@ function normalizeRating(id: string, data: Partial<Rating>): Rating {
   };
 }
 
-export function startFirestoreData() {
-  if (subscribeStarted || typeof window === "undefined") return;
-  subscribeStarted = true;
+async function loadFirestoreData() {
+  if (loadPromise) return loadPromise;
 
-  const bind = <T>(
+  const bind = async <T>(
     collectionName: string,
     assign: (next: T[]) => void,
     normalize: (id: string, data: Record<string, unknown>) => T,
     sort: (a: T, b: T) => number = () => 0,
   ) => {
-    onSnapshot(
-      collection(db, collectionName),
-      (snapshot) => {
-        lastError = null;
-        loadedCollections.add(collectionName);
-        assign(snapshot.docs.map((item) => normalize(item.id, item.data())).sort(sort));
-        emit();
-      },
-      (error) => {
-        lastError = error;
-        loadedCollections.add(collectionName);
-        emit();
-      },
-    );
+    try {
+      const snapshot = await getDocs(collection(db, collectionName));
+      lastError = null;
+      assign(snapshot.docs.map((item) => normalize(item.id, item.data())).sort(sort));
+    } catch (error) {
+      lastError = error as FirestoreError;
+    } finally {
+      loadedCollections.add(collectionName);
+      emit();
+    }
   };
 
-  bind(
-    "standards",
-    (next) => {
-      standards = next;
-    },
-    normalizeStandard,
-    byName,
-  );
-  bind(
-    "teachers",
-    (next) => {
-      teachers = next;
-    },
-    normalizeTeacher,
-    byName,
-  );
-  bind(
-    "classes",
-    (next) => {
-      classes = next;
-    },
-    normalizeClassRoom,
-    byName,
-  );
-  bind(
-    "students",
-    (next) => {
-      students = next;
-    },
-    normalizeStudent,
-    byName,
-  );
-  bind(
-    "ratings",
-    (next) => {
-      ratings = next;
-    },
-    normalizeRating,
-  );
+  loadPromise = Promise.all([
+    bind(
+      "standards",
+      (next) => {
+        standards = next;
+      },
+      normalizeStandard,
+      byName,
+    ),
+    bind(
+      "teachers",
+      (next) => {
+        teachers = next;
+      },
+      normalizeTeacher,
+      byName,
+    ),
+    bind(
+      "classes",
+      (next) => {
+        classes = next;
+      },
+      normalizeClassRoom,
+      byName,
+    ),
+    bind(
+      "students",
+      (next) => {
+        students = next;
+      },
+      normalizeStudent,
+      byName,
+    ),
+    bind(
+      "ratings",
+      (next) => {
+        ratings = next;
+      },
+      normalizeRating,
+    ),
+  ]).then(() => undefined);
 
-  window.setTimeout(() => {
-    if (loadedCollections.size === 5) return;
-    ["standards", "teachers", "classes", "students", "ratings"].forEach((name) =>
-      loadedCollections.add(name),
-    );
-    emit();
-  }, 10_000);
+  try {
+    await loadPromise;
+  } finally {
+    loadPromise = null;
+  }
+}
+
+export function startFirestoreData() {
+  if (loadStarted || typeof window === "undefined") return;
+  loadStarted = true;
+  void loadFirestoreData();
+}
+
+async function refreshFirestoreData() {
+  await loadFirestoreData();
 }
 
 export function useFirestoreData() {
@@ -370,30 +376,37 @@ export async function saveRatingForStudent(
 
 export async function saveStandard(standard: Standard) {
   await setDoc(doc(db, "standards", standard.id), standard);
+  await refreshFirestoreData();
 }
 
 export async function deleteStandard(id: string) {
   await deleteDoc(doc(db, "standards", id));
+  await refreshFirestoreData();
 }
 
 export async function saveTeacher(teacher: Teacher) {
   await setDoc(doc(db, "teachers", teacher.id), teacher);
+  await refreshFirestoreData();
 }
 
 export async function deleteTeacher(id: string) {
   await deleteDoc(doc(db, "teachers", id));
+  await refreshFirestoreData();
 }
 
 export async function saveClassRoom(classRoom: ClassRoom) {
   await setDoc(doc(db, "classes", classRoom.id), classRoom);
+  await refreshFirestoreData();
 }
 
 export async function saveStudent(student: Student) {
   await setDoc(doc(db, "students", student.id), student);
+  await refreshFirestoreData();
 }
 
 export async function deleteStudent(id: string) {
   await deleteDoc(doc(db, "students", id));
+  await refreshFirestoreData();
 }
 
 export async function saveStudentScores(studentId: string, todayScores: Record<string, number>) {
