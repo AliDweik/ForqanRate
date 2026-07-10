@@ -1,10 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { BrandLogo } from "@/components/brand-logo";
-import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/login")({
   head: () => ({ meta: [{ title: "تسجيل الدخول — مركز الفرقان القرآني" }] }),
@@ -19,16 +14,19 @@ function LoginPage() {
   return (
     <div className="min-h-screen bg-background">
       <header className="mx-auto flex max-w-5xl items-center justify-between p-4 sm:p-6">
-        <BrandLogo />
-        <Button asChild variant="ghost" size="sm">
-          <Link to="/">
-            <ArrowRight className="ml-2 h-4 w-4" /> رجوع
-          </Link>
-        </Button>
+        <Link to="/" className="text-lg font-bold text-primary">
+          مركز الفرقان القرآني
+        </Link>
+        <Link
+          to="/"
+          className="rounded-md px-3 py-2 text-sm font-medium text-primary hover:bg-accent"
+        >
+          رجوع
+        </Link>
       </header>
 
       <main className="mx-auto flex max-w-md px-4 py-8 sm:px-6">
-        <Card className="w-full p-6 shadow-elev sm:p-8">
+        <section className="w-full rounded-lg border border-border bg-card p-6 shadow-elev sm:p-8">
           <div>
             <h1 className="font-display text-3xl text-primary">تسجيل الدخول</h1>
             <p className="mt-1 text-sm text-muted-foreground">للمعلمين ومدير المركز فقط</p>
@@ -42,8 +40,8 @@ function LoginPage() {
                 setLoading(true);
                 try {
                   const form = new FormData(e.currentTarget);
-                  const email = String(form.get("email") ?? "").trim();
-                  const password = String(form.get("password") ?? "");
+                  const email = String(form.get("forqan_user") ?? "").trim();
+                  const password = String(form.get("forqan_pass") ?? "");
                   const { signInAndResolve } = await import("@/lib/auth-session");
                   const resolved = await signInAndResolve(email.trim(), password);
                   nav({ to: resolved.role === "admin" ? "/admin" : "/teacher" });
@@ -55,31 +53,39 @@ function LoginPage() {
               }}
             >
               <div>
-                <Label htmlFor="e">البريد الإلكتروني</Label>
+                <label htmlFor="forqan-user" className="mb-1.5 block text-sm font-medium">
+                  البريد الإلكتروني
+                </label>
                 <input
-                  id="e"
-                  name="email"
+                  id="forqan-user"
+                  name="forqan_user"
                   type="text"
                   placeholder="name@example.com"
                   dir="ltr"
                   inputMode="email"
                   autoCapitalize="none"
                   autoCorrect="off"
+                  data-lpignore="true"
+                  data-1p-ignore="true"
                   spellCheck={false}
                   autoComplete="off"
-                  className="flex h-10 w-full rounded-md border border-input bg-card px-3 py-2 text-base shadow-sm outline-none focus:ring-1 focus:ring-ring"
+                  className="block h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base outline-none focus:border-primary"
                   required
                 />
               </div>
               <div>
-                <Label htmlFor="p">كلمة المرور</Label>
+                <label htmlFor="forqan-pass" className="mb-1.5 block text-sm font-medium">
+                  كلمة المرور
+                </label>
                 <input
-                  id="p"
-                  name="password"
+                  id="forqan-pass"
+                  name="forqan_pass"
                   type="password"
                   placeholder="••••••••"
+                  data-lpignore="true"
+                  data-1p-ignore="true"
                   autoComplete="off"
-                  className="flex h-10 w-full rounded-md border border-input bg-card px-3 py-2 text-base shadow-sm outline-none focus:ring-1 focus:ring-ring"
+                  className="block h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base outline-none focus:border-primary"
                   required
                 />
               </div>
@@ -88,12 +94,16 @@ function LoginPage() {
                   {errorMessage}
                 </p>
               )}
-              <Button type="submit" className="w-full" size="lg" disabled={loading}>
+              <button
+                type="submit"
+                className="h-10 w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={loading}
+              >
                 {loading ? "جارٍ التحقق..." : "دخول"}
-              </Button>
+              </button>
             </form>
           </div>
-        </Card>
+        </section>
       </main>
     </div>
   );
