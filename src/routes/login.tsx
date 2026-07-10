@@ -2,13 +2,10 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { BrandLogo } from "@/components/brand-logo";
 import { IslamicPatternBg, ArchOrnament } from "@/components/islamic-pattern";
 import { ArrowRight, ShieldCheck } from "lucide-react";
-import { signInAndResolve } from "@/lib/auth-session";
-import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
   head: () => ({ meta: [{ title: "تسجيل الدخول — مركز الفرقان القرآني" }] }),
@@ -17,8 +14,6 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const nav = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -62,17 +57,20 @@ function LoginPage() {
 
             <form
               className="mt-6 space-y-4"
-              autoComplete="on"
+              autoComplete="off"
               onSubmit={async (e) => {
                 e.preventDefault();
                 setErrorMessage("");
                 setLoading(true);
                 try {
+                  const form = new FormData(e.currentTarget);
+                  const email = String(form.get("email") ?? "").trim();
+                  const password = String(form.get("password") ?? "");
+                  const { signInAndResolve } = await import("@/lib/auth-session");
                   const resolved = await signInAndResolve(email.trim(), password);
                   nav({ to: resolved.role === "admin" ? "/admin" : "/teacher" });
                 } catch {
                   setErrorMessage("البريد الإلكتروني أو كلمة المرور غير صحيحة");
-                  toast.error("البريد الإلكتروني أو كلمة المرور غير صحيحة");
                 } finally {
                   setLoading(false);
                 }
@@ -80,27 +78,30 @@ function LoginPage() {
             >
               <div>
                 <Label htmlFor="e">البريد الإلكتروني</Label>
-                <Input
+                <input
                   id="e"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  type="text"
                   placeholder="name@example.com"
                   dir="ltr"
                   inputMode="email"
-                  autoComplete="username"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  autoComplete="off"
+                  className="flex h-10 w-full rounded-md border border-input bg-card px-3 py-2 text-base shadow-sm outline-none focus:ring-1 focus:ring-ring"
                   required
                 />
               </div>
               <div>
                 <Label htmlFor="p">كلمة المرور</Label>
-                <Input
+                <input
                   id="p"
+                  name="password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  autoComplete="current-password"
+                  autoComplete="off"
+                  className="flex h-10 w-full rounded-md border border-input bg-card px-3 py-2 text-base shadow-sm outline-none focus:ring-1 focus:ring-ring"
                   required
                 />
               </div>
