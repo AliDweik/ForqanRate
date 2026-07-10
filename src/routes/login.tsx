@@ -21,6 +21,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (!session.ready || !session.role) return;
@@ -69,11 +70,13 @@ function LoginPage() {
               className="mt-6 space-y-4"
               onSubmit={async (e) => {
                 e.preventDefault();
+                setErrorMessage("");
                 setLoading(true);
                 try {
                   const resolved = await signInAndResolve(email.trim(), password);
                   nav({ to: resolved.role === "admin" ? "/admin" : "/teacher" });
                 } catch {
+                  setErrorMessage("البريد الإلكتروني أو كلمة المرور غير صحيحة");
                   toast.error("البريد الإلكتروني أو كلمة المرور غير صحيحة");
                 } finally {
                   setLoading(false);
@@ -89,6 +92,7 @@ function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
                   dir="ltr"
+                  required
                 />
               </div>
               <div>
@@ -99,8 +103,14 @@ function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
+                  required
                 />
               </div>
+              {errorMessage && (
+                <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+                  {errorMessage}
+                </p>
+              )}
               <Button type="submit" className="w-full" size="lg" disabled={loading}>
                 {loading ? "جارٍ التحقق..." : "دخول"}
               </Button>

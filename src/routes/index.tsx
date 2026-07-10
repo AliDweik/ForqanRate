@@ -2,13 +2,6 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
 import { BrandLogo } from "@/components/brand-logo";
 import { IslamicPatternBg, ArchOrnament } from "@/components/islamic-pattern";
 import { useFirestoreData } from "@/lib/firestore-data";
@@ -69,18 +62,18 @@ function LandingPage() {
             <div className="space-y-4">
               <div>
                 <label className="mb-1.5 block text-sm font-medium">الشعبة</label>
-                <Select value={classId} onValueChange={setClassId}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="اختر الشعبة" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {classes.map((c) => (
-                      <SelectItem key={c.id} value={c.id}>
-                        {c.name} — {c.level}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <select
+                  value={classId ?? ""}
+                  onChange={(event) => setClassId(event.target.value || undefined)}
+                  className="h-10 w-full rounded-md border border-input bg-card px-3 py-2 text-sm shadow-sm outline-none focus:ring-1 focus:ring-ring"
+                >
+                  <option value="">اختر الشعبة</option>
+                  {classes.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name} — {c.level}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <Button
