@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { BrandLogo } from "@/components/brand-logo";
 import { IslamicPatternBg, ArchOrnament } from "@/components/islamic-pattern";
 import { ArrowRight, ShieldCheck } from "lucide-react";
-import { signInAndResolve, useAuthSession } from "@/lib/auth-session";
+import { signInAndResolve } from "@/lib/auth-session";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
@@ -17,16 +17,10 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const nav = useNavigate();
-  const session = useAuthSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    if (!session.ready || !session.role) return;
-    nav({ to: session.role === "admin" ? "/admin" : "/teacher" });
-  }, [nav, session.ready, session.role]);
 
   return (
     <div className="relative min-h-screen overflow-hidden pattern-islamic">
@@ -47,10 +41,10 @@ function LoginPage() {
         <div className="hidden lg:block">
           <div className="relative mx-auto aspect-square max-w-md">
             <div className="pointer-events-none absolute inset-0 rounded-[3rem] teal-gradient shadow-elev" />
-            <div className="absolute inset-4 rounded-[2.5rem] bg-card p-8">
+            <div className="pointer-events-none absolute inset-4 rounded-[2.5rem] bg-card p-8">
               <ArchOrnament className="mx-auto h-full w-full" />
             </div>
-            <div className="absolute -bottom-4 -right-4 rounded-2xl gold-gradient p-4 shadow-gold animate-float">
+            <div className="pointer-events-none absolute -bottom-4 -right-4 rounded-2xl gold-gradient p-4 shadow-gold animate-float">
               <ShieldCheck className="h-8 w-8 text-gold-foreground" />
             </div>
           </div>
@@ -68,6 +62,7 @@ function LoginPage() {
 
             <form
               className="mt-6 space-y-4"
+              autoComplete="on"
               onSubmit={async (e) => {
                 e.preventDefault();
                 setErrorMessage("");
@@ -92,6 +87,8 @@ function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
                   dir="ltr"
+                  inputMode="email"
+                  autoComplete="username"
                   required
                 />
               </div>
@@ -103,6 +100,7 @@ function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
+                  autoComplete="current-password"
                   required
                 />
               </div>
