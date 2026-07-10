@@ -45,7 +45,7 @@ function LoginPage() {
       <main className="relative z-10 mx-auto grid max-w-5xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:items-center">
         <div className="hidden lg:block">
           <div className="relative mx-auto aspect-square max-w-md">
-            <div className="absolute inset-0 rounded-[3rem] teal-gradient shadow-elev" />
+            <div className="pointer-events-none absolute inset-0 rounded-[3rem] teal-gradient shadow-elev" />
             <div className="absolute inset-4 rounded-[2.5rem] bg-card p-8">
               <ArchOrnament className="mx-auto h-full w-full" />
             </div>
@@ -60,8 +60,8 @@ function LoginPage() {
         </div>
 
         <Card className="relative overflow-hidden p-8 shadow-elev sm:p-10">
-          <div className="absolute inset-0 pattern-islamic opacity-30" />
-          <div className="relative">
+          <div className="pointer-events-none absolute inset-0 pattern-islamic opacity-30" />
+          <div className="relative z-10">
             <h1 className="font-display text-3xl text-primary">تسجيل الدخول</h1>
             <p className="mt-1 text-sm text-muted-foreground">للمعلمين ومدير المركز فقط</p>
 

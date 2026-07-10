@@ -55,7 +55,7 @@ function StudentProfile() {
       </div>
 
       <Card className="relative overflow-hidden p-6 sm:p-8">
-        <div className="absolute inset-0 pattern-islamic opacity-30" />
+        <div className="pointer-events-none absolute inset-0 pattern-islamic opacity-30" />
         <div className="relative grid gap-6 md:grid-cols-[auto_1fr_auto] md:items-center">
           <div className="rounded-full bg-gradient-to-br from-[oklch(0.88_0.11_90)] to-[oklch(0.65_0.15_70)] p-1">
             <img

@@ -48,7 +48,7 @@ function Leaderboard() {
 
         {/* Podium */}
         <Card className="relative overflow-hidden p-6 sm:p-10">
-          <div className="absolute inset-0 pattern-islamic opacity-30" />
+          <div className="pointer-events-none absolute inset-0 pattern-islamic opacity-30" />
           <div className="relative grid grid-cols-3 items-end gap-3 sm:gap-6">
             {order.map((rankIdx, i) => {
               const p = podium[rankIdx];

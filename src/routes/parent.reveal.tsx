@@ -99,8 +99,8 @@ function RevealPage() {
 
         {publishing && !isTodayVacation && (
           <Card className="relative mx-auto mt-6 max-w-xl overflow-hidden p-6 text-center shadow-soft">
-            <div className="absolute inset-0 pattern-islamic opacity-20" />
-            <div className="relative">
+            <div className="pointer-events-none absolute inset-0 pattern-islamic opacity-20" />
+            <div className="relative z-10">
               <p className="text-sm text-muted-foreground">
                 سيتم تحديث {thursday ? "فارس الأسبوع" : "فارس اليوم"} بعد إغلاق تقييم اليوم (الساعة{" "}
                 {cls?.closeTime ? formatTime12h(cls.closeTime) : ""})

@@ -59,8 +59,8 @@ function LandingPage() {
         </section>
 
         <Card className="relative overflow-hidden border-0 p-6 shadow-elev sm:p-8">
-          <div className="absolute inset-0 pattern-islamic opacity-40" />
-          <div className="relative">
+          <div className="pointer-events-none absolute inset-0 pattern-islamic opacity-40" />
+          <div className="relative z-10">
             <div className="mb-4 flex items-center gap-2">
               <Users className="h-5 w-5 text-primary" />
               <h2 className="text-lg font-bold">اختر لعرض فارس اليوم</h2>
