@@ -60,8 +60,8 @@ function LoginPage() {
         </div>
 
         <Card className="relative overflow-hidden p-8 shadow-elev sm:p-10">
-          <div className="absolute inset-0 pattern-islamic opacity-30" />
-          <div className="relative">
+          <div className="pointer-events-none absolute inset-0 pattern-islamic opacity-30" />
+          <div className="relative z-10">
             <h1 className="font-display text-3xl text-primary">تسجيل الدخول</h1>
             <p className="mt-1 text-sm text-muted-foreground">للمعلمين ومدير المركز فقط</p>
 
