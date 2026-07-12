@@ -1041,7 +1041,7 @@
         <div class="silent-loading" aria-hidden="true"></div>
       } @else if (revealKnight; as knight) {
         <section class="knight-wrap">
-          <article class="knight-card">
+          <article id="knight-card-download" class="knight-card">
             <div class="card-pattern" aria-hidden="true"></div>
             <div class="knight-content">
               <div class="knight-top">
@@ -1087,6 +1087,9 @@
             </div>
           </article>
           <p class="published-date">يوم التتويج: {{ data.formatArabicDate(knight.day) }}</p>
+          <button class="secondary-button download-card-button" type="button" (click)="downloadKnightCard()">
+            تنزيل البطاقة
+          </button>
         </section>
       } @else {
         <section class="selection-card message-card">

@@ -785,6 +785,103 @@ export class App {
     return String(value).replace(/\d/g, (digit) => digits[Number(digit)]);
   }
 
+  protected async downloadKnightCard() {
+    const knight = this.revealKnight;
+    if (!knight) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 900;
+    canvas.height = 1300;
+    const context = canvas.getContext('2d');
+    if (!context) return;
+
+    const gradient = context.createLinearGradient(0, 0, 900, 1300);
+    gradient.addColorStop(0, '#23405d');
+    gradient.addColorStop(1, '#173c42');
+    context.fillStyle = gradient;
+    this.roundedRect(context, 0, 0, 900, 1300, 56);
+    context.fill();
+
+    context.strokeStyle = '#d9b85d';
+    context.lineWidth = 10;
+    this.roundedRect(context, 28, 28, 844, 1244, 46);
+    context.stroke();
+
+    context.textAlign = 'right';
+    context.direction = 'rtl';
+    context.fillStyle = '#f1d275';
+    context.font = '700 64px Amiri, Tajawal, serif';
+    context.fillText(this.revealTitle, 815, 140);
+
+    context.fillStyle = 'rgba(255,255,255,0.7)';
+    context.font = '500 28px Tajawal, sans-serif';
+    context.fillText(this.data.formatArabicDate(knight.day), 815, 185);
+
+    context.fillStyle = 'rgba(255,255,255,0.9)';
+    context.font = '700 34px Amiri, Tajawal, serif';
+    context.fillText('مركز الفرقان القرآني', 360, 140);
+
+    await this.drawStudentPhoto(context, knight.student.photo, knight.student.name);
+
+    context.fillStyle = '#ffffff';
+    context.textAlign = 'center';
+    context.font = '700 52px Tajawal, sans-serif';
+    context.fillText(knight.student.name, 450, 620);
+
+    context.fillStyle = 'rgba(255,255,255,0.72)';
+    context.font = '500 30px Tajawal, sans-serif';
+    context.fillText(this.revealClass?.name ?? '', 450, 665);
+
+    const badge = context.createLinearGradient(310, 700, 590, 760);
+    badge.addColorStop(0, '#f1d275');
+    badge.addColorStop(1, '#c9902d');
+    context.fillStyle = badge;
+    this.roundedRect(context, 330, 700, 240, 64, 32);
+    context.fill();
+    context.fillStyle = '#4b340f';
+    context.font = '800 34px Tajawal, sans-serif';
+    context.fillText(`${this.arabicNumber(knight.percent)}٪`, 450, 744);
+
+    let y = 840;
+    for (const standard of this.data.standardsForScoring()) {
+      const value = knight.student.todayScores[standard.id] ?? 0;
+      const percent = Math.max(0, Math.min(100, (value / 5) * 100));
+
+      context.textAlign = 'right';
+      context.fillStyle = 'rgba(255,255,255,0.86)';
+      context.font = '700 28px Tajawal, sans-serif';
+      context.fillText(standard.name, 790, y);
+
+      context.textAlign = 'left';
+      context.fillStyle = '#f1d275';
+      context.font = '700 26px Tajawal, sans-serif';
+      context.fillText(`${this.arabicNumber(value)}/٥`, 110, y);
+
+      context.fillStyle = 'rgba(255,255,255,0.14)';
+      this.roundedRect(context, 110, y + 22, 680, 14, 7);
+      context.fill();
+
+      const bar = context.createLinearGradient(110, y + 22, 790, y + 22);
+      bar.addColorStop(0, '#c9902d');
+      bar.addColorStop(1, '#f1d275');
+      context.fillStyle = bar;
+      this.roundedRect(context, 110 + 680 - (680 * percent) / 100, y + 22, (680 * percent) / 100, 14, 7);
+      context.fill();
+
+      y += 92;
+    }
+
+    context.textAlign = 'center';
+    context.fillStyle = 'rgba(255,255,255,0.58)';
+    context.font = '500 24px Tajawal, sans-serif';
+    context.fillText('مركز الفرقان القرآني • بوابة للخير', 450, 1220);
+
+    const link = document.createElement('a');
+    link.download = `${this.revealTitle}-${knight.student.name}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
   protected reportBarWidth(value: number) {
     return Math.max(0, Math.min(100, Math.round(value)));
   }
@@ -982,5 +1079,59 @@ export class App {
     const finite = values.map(Number).filter((value) => Number.isFinite(value));
     if (finite.length === 0) return 0;
     return Math.round(finite.reduce((sum, value) => sum + value, 0) / finite.length);
+  }
+
+  private async drawStudentPhoto(context: CanvasRenderingContext2D, src: string, name: string) {
+    context.save();
+    context.beginPath();
+    context.arc(450, 405, 142, 0, Math.PI * 2);
+    context.fillStyle = '#f1d275';
+    context.fill();
+    context.clip();
+
+    try {
+      const image = await this.loadImage(src);
+      context.drawImage(image, 315, 270, 270, 270);
+    } catch {
+      context.fillStyle = 'rgba(255,255,255,0.12)';
+      context.fillRect(315, 270, 270, 270);
+      context.fillStyle = '#f1d275';
+      context.textAlign = 'center';
+      context.font = '800 140px Amiri, serif';
+      context.fillText(name.slice(0, 1), 450, 445);
+    } finally {
+      context.restore();
+    }
+  }
+
+  private loadImage(src: string) {
+    return new Promise<HTMLImageElement>((resolve, reject) => {
+      const image = new Image();
+      image.crossOrigin = 'anonymous';
+      image.onload = () => resolve(image);
+      image.onerror = reject;
+      image.src = src;
+    });
+  }
+
+  private roundedRect(
+    context: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number,
+  ) {
+    context.beginPath();
+    context.moveTo(x + radius, y);
+    context.lineTo(x + width - radius, y);
+    context.quadraticCurveTo(x + width, y, x + width, y + radius);
+    context.lineTo(x + width, y + height - radius);
+    context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    context.lineTo(x + radius, y + height);
+    context.quadraticCurveTo(x, y + height, x, y + height - radius);
+    context.lineTo(x, y + radius);
+    context.quadraticCurveTo(x, y, x + radius, y);
+    context.closePath();
   }
 }

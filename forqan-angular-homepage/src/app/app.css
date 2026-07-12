@@ -692,6 +692,11 @@ textarea:focus {
   text-align: center;
 }
 
+.download-card-button {
+  gap: 0.4rem;
+  min-width: 9rem;
+}
+
 .status-card {
   position: relative;
   overflow: hidden;
