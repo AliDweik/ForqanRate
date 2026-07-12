@@ -6,10 +6,24 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+const githubPagesBase = (() => {
+  const envBase = process.env.GITHUB_PAGES_BASE?.trim();
+  if (envBase) return `/${envBase.replace(/^\/+|\/+$/g, "")}`;
+  return "/ForqanRate";
+})();
+
 export default defineConfig({
+  vite: {
+    base: `${githubPagesBase}/`,
+  },
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
+    // GitHub Pages is static-only, so build the app as a client bundle.
+    compilationMode: "client-only",
+    client: {
+      entry: "client.tsx",
+    },
+    router: {
+      basepath: githubPagesBase,
+    },
   },
 });
