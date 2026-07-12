@@ -1,0 +1,58 @@
+name: Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches:
+      - angular-system-pages
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-angular
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy Angular
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: forqan-angular-homepage/package-lock.json
+
+      - name: Install dependencies
+        working-directory: forqan-angular-homepage
+        run: npm ci
+
+      - name: Build
+        working-directory: forqan-angular-homepage
+        run: npm run build -- --base-href /ForqanRate/
+
+      - name: Prepare SPA fallback
+        run: cp forqan-angular-homepage/dist/forqan-angular-homepage/browser/index.html forqan-angular-homepage/dist/forqan-angular-homepage/browser/404.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: forqan-angular-homepage/dist/forqan-angular-homepage/browser
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

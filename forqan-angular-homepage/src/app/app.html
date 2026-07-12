@@ -1,0 +1,1190 @@
+<div class="page pattern-islamic">
+  <div class="pattern-bg" aria-hidden="true"></div>
+  <svg class="arch arch-right" viewBox="0 0 120 160" aria-hidden="true">
+    <defs>
+      <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+        <stop offset="0" stop-color="oklch(0.88 0.11 90)" />
+        <stop offset="1" stop-color="oklch(0.65 0.15 70)" />
+      </linearGradient>
+    </defs>
+    <path d="M10 150 L10 60 Q10 10 60 10 Q110 10 110 60 L110 150 Z" fill="none" stroke="url(#gold)" stroke-width="3" />
+    <path d="M20 150 L20 62 Q20 20 60 20 Q100 20 100 62 L100 150" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.5" />
+    <g stroke="url(#gold)" stroke-width="1.2" fill="none" opacity="0.85">
+      <circle cx="60" cy="80" r="22" />
+      <path d="M60 58 L66 74 L82 74 L69 84 L74 100 L60 90 L46 100 L51 84 L38 74 L54 74 Z" />
+    </g>
+  </svg>
+  <svg class="arch arch-left" viewBox="0 0 120 160" aria-hidden="true">
+    <path d="M10 150 L10 60 Q10 10 60 10 Q110 10 110 60 L110 150 Z" fill="none" stroke="url(#gold)" stroke-width="3" />
+    <path d="M20 150 L20 62 Q20 20 60 20 Q100 20 100 62 L100 150" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.5" />
+    <g stroke="url(#gold)" stroke-width="1.2" fill="none" opacity="0.85">
+      <circle cx="60" cy="80" r="22" />
+      <path d="M60 58 L66 74 L82 74 L69 84 L74 100 L60 90 L46 100 L51 84 L38 74 L54 74 Z" />
+    </g>
+  </svg>
+
+  <header class="shell header" [class.reveal-header]="isRevealPage || isLoginPage || isProtectedPage">
+    <a class="brand" [href]="appUrl('/')" aria-label="مركز الفرقان القرآني">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40">
+          <path d="M20 4 L28 12 L28 32 L12 32 L12 12 Z" fill="none" stroke="oklch(0.88 0.11 90)" stroke-width="1.8" />
+          <path d="M20 14 L23 20 L29 20 L24 24 L26 30 L20 26 L14 30 L16 24 L11 20 L17 20 Z" fill="oklch(0.95 0.02 200)" opacity="0.9" />
+        </svg>
+      </span>
+      <span class="brand-copy">
+        <span class="brand-title">مركز الفرقان القرآني</span>
+        <span class="brand-subtitle">بوابة للخير</span>
+      </span>
+    </a>
+
+    @if (isRevealPage || isLoginPage || isProtectedPage) {
+      <a class="ghost-button" [href]="appUrl('/')">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+        رجوع
+      </a>
+    } @else {
+      <a class="ghost-button" [href]="appUrl('/login')">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+          <path d="m10 17 5-5-5-5" />
+          <path d="M15 12H3" />
+        </svg>
+        دخول المعلم / الإدارة
+      </a>
+    }
+  </header>
+
+  @if (isLoginPage) {
+    <main class="shell login-main">
+      <section class="login-art" aria-hidden="true">
+        <div class="login-art-frame">
+          <div class="login-art-gradient"></div>
+          <div class="login-art-inner">
+            <svg viewBox="0 0 120 160">
+              <path d="M10 150 L10 60 Q10 10 60 10 Q110 10 110 60 L110 150 Z" fill="none" stroke="url(#gold)" stroke-width="3" />
+              <path d="M20 150 L20 62 Q20 20 60 20 Q100 20 100 62 L100 150" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.5" />
+              <g stroke="url(#gold)" stroke-width="1.2" fill="none" opacity="0.85">
+                <circle cx="60" cy="80" r="22" />
+                <path d="M60 58 L66 74 L82 74 L69 84 L74 100 L60 90 L46 100 L51 84 L38 74 L54 74 Z" />
+              </g>
+            </svg>
+          </div>
+          <div class="shield-badge">
+            <svg viewBox="0 0 24 24">
+              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+          </div>
+        </div>
+        <h2>أهلاً بك في بوابة الخير</h2>
+        <p>لوحة تحكم مركز الفرقان القرآني</p>
+      </section>
+
+      <section class="selection-card login-card">
+        <div class="card-pattern" aria-hidden="true"></div>
+        <div class="card-content">
+          <h1>تسجيل الدخول</h1>
+          <p class="login-subtitle">للمعلمين ومدير المركز فقط</p>
+
+          @if (auth.session().ready && auth.session().role) {
+            <div class="auth-current">
+              <p>أنت مسجل الدخول كـ {{ auth.session().role === 'admin' ? 'مدير' : 'معلم' }}.</p>
+              <button class="primary-button" type="button" (click)="goToDashboard()">
+                الذهاب إلى لوحة التحكم
+              </button>
+              <button class="secondary-button" type="button" (click)="logout()">تسجيل الخروج</button>
+            </div>
+          } @else {
+            <form class="login-form" (submit)="submitLogin($event)">
+              <div class="form-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="name@example.com"
+                  dir="ltr"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="••••••••"
+                  autocomplete="current-password"
+                  required
+                />
+              </div>
+
+              @if (loginError) {
+                <p class="inline-error">{{ loginError }}</p>
+              }
+
+              <button class="primary-button" type="submit" [disabled]="loginLoading">
+                {{ loginLoading ? 'جارٍ التحقق...' : 'دخول' }}
+              </button>
+            </form>
+          }
+        </div>
+      </section>
+    </main>
+  } @else if (isProtectedPage) {
+    <main class="shell reveal-main">
+      @if (!auth.session().ready) {
+        <div class="silent-loading" aria-hidden="true"></div>
+      } @else if (isAdminPage && auth.session().role === 'admin') {
+        <section class="admin-layout">
+          <aside class="admin-sidebar">
+            <div class="admin-sidebar-title">الإدارة</div>
+            <nav class="admin-nav" aria-label="صفحات الإدارة">
+              @for (item of adminNav; track item.page) {
+                <a [href]="appUrl(item.href)" [class.active]="adminPage === item.page">{{ item.label }}</a>
+              }
+            </nav>
+            <button class="secondary-button" type="button" (click)="logout()">تسجيل الخروج</button>
+          </aside>
+
+          <section class="admin-content">
+            <div class="admin-heading">
+              <div>
+                <h1>{{ adminTitle }}</h1>
+                <p>إدارة بيانات مركز الفرقان القرآني مباشرة.</p>
+              </div>
+            </div>
+
+            @if (adminNotice) {
+              <p class="inline-success">{{ adminNotice }}</p>
+            }
+            @if (adminError) {
+              <p class="inline-error">{{ adminError }}</p>
+            }
+
+            @if (adminPage === 'dashboard') {
+              <div class="stat-grid">
+                <article class="stat-card">
+                  <span>عدد الشعب</span>
+                  <strong>{{ adminStats.classes }}</strong>
+                </article>
+                <article class="stat-card">
+                  <span>عدد المعلمين</span>
+                  <strong>{{ adminStats.teachers }}</strong>
+                </article>
+                <article class="stat-card">
+                  <span>عدد الطلاب</span>
+                  <strong>{{ adminStats.students }}</strong>
+                </article>
+                <article class="stat-card">
+                  <span>تقييمات مسجلة</span>
+                  <strong>{{ adminStats.rated }}</strong>
+                </article>
+                <article class="stat-card">
+                  <span>طلاب بلا تقييم</span>
+                  <strong>{{ adminStats.pending }}</strong>
+                </article>
+              </div>
+
+              <div class="admin-panel">
+                <h2>الشعب الحالية</h2>
+                <div class="compact-list">
+                  @for (classRoom of data.classes(); track classRoom.id) {
+                    <div class="compact-row">
+                      <span>{{ classRoom.name }}</span>
+                      <small>{{ classRoom.level }} · {{ classStudentCount(classRoom.id) }} طالب</small>
+                    </div>
+                  } @empty {
+                    <p class="muted">لا توجد شعب بعد.</p>
+                  }
+                </div>
+              </div>
+            } @else if (adminPage === 'teachers') {
+              <div class="admin-toolbar">
+                <button class="primary-button compact-action" type="button" (click)="openTeacherForm()">إضافة معلم</button>
+              </div>
+
+              @if (teacherFormOpen) {
+                <form class="admin-form" (submit)="saveTeacher($event)">
+                  <h2>{{ editingTeacher ? 'تعديل معلم' : 'إضافة معلم' }}</h2>
+                  <div class="form-grid">
+                    <div class="form-group">
+                      <label for="teacherName">الاسم</label>
+                      <input id="teacherName" name="teacherName" [(ngModel)]="teacherForm.name" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="teacherPhone">رقم الهاتف</label>
+                      <input id="teacherPhone" name="teacherPhone" [(ngModel)]="teacherForm.phone" dir="ltr" />
+                    </div>
+                    <div class="form-group">
+                      <label for="teacherEmail">البريد الإلكتروني</label>
+                      <input id="teacherEmail" name="teacherEmail" type="email" [(ngModel)]="teacherForm.email" dir="ltr" required />
+                    </div>
+                    @if (!editingTeacher) {
+                      <div class="form-group">
+                        <label for="teacherPassword">كلمة المرور</label>
+                        <input id="teacherPassword" name="teacherPassword" type="password" [(ngModel)]="teacherForm.password" autocomplete="new-password" required />
+                      </div>
+                    }
+                    <div class="form-group">
+                      <label for="teacherClass">الشعبة</label>
+                      <select id="teacherClass" name="teacherClass" [(ngModel)]="teacherForm.classId">
+                        <option value="">بدون شعبة</option>
+                        @for (classRoom of data.classes(); track classRoom.id) {
+                          <option [value]="classRoom.id">{{ classRoom.name }}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button class="secondary-button" type="button" (click)="teacherFormOpen = false">إلغاء</button>
+                    <button class="primary-button compact-action" type="submit">حفظ</button>
+                  </div>
+                  <p class="form-hint">سيتم إنشاء حساب دخول للمعلم بنفس البريد وكلمة المرور.</p>
+                </form>
+              }
+
+              <div class="card-grid">
+                @for (teacher of data.teachers(); track teacher.id) {
+                  <article class="admin-card">
+                    <div>
+                      <h3>{{ teacher.name }}</h3>
+                      <p dir="ltr">{{ teacher.phone || '—' }}</p>
+                      <p dir="ltr">{{ teacher.email || '—' }}</p>
+                      <span>{{ data.classById(teacher.classIds[0] || '')?.name || 'بدون شعبة' }}</span>
+                    </div>
+                    <div class="row-actions">
+                      <button type="button" (click)="openTeacherForm(teacher)">تعديل</button>
+                      <button class="danger" type="button" (click)="deleteTeacher(teacher.id)">حذف</button>
+                    </div>
+                  </article>
+                } @empty {
+                  <p class="muted">لا يوجد معلمون بعد.</p>
+                }
+              </div>
+            } @else if (adminPage === 'classes') {
+              <div class="admin-toolbar">
+                <select [(ngModel)]="classLevelFilter" aria-label="تصفية الشعب">
+                  <option value="all">كل الفئات</option>
+                  @for (level of classLevels; track level) {
+                    <option [value]="level">{{ level }}</option>
+                  }
+                </select>
+                <button class="primary-button compact-action" type="button" (click)="openClassForm()">إضافة شعبة</button>
+              </div>
+
+              @if (classFormOpen) {
+                <form class="admin-form" (submit)="saveClassRoom($event)">
+                  <h2>{{ editingClass ? 'تعديل شعبة' : 'إضافة شعبة' }}</h2>
+                  <div class="form-grid">
+                    <div class="form-group">
+                      <label for="className">اسم الشعبة</label>
+                      <input id="className" name="className" [(ngModel)]="classForm.name" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="classLevel">الفئة</label>
+                      <select id="classLevel" name="classLevel" [(ngModel)]="classForm.level">
+                        @for (level of classLevels; track level) {
+                          <option [value]="level">{{ level }}</option>
+                        }
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="classTeacher">المعلم</label>
+                      <select id="classTeacher" name="classTeacher" [(ngModel)]="classForm.teacherId">
+                        <option value="">بدون معلم</option>
+                        @for (teacher of data.teachers(); track teacher.id) {
+                          <option [value]="teacher.id">{{ teacher.name }}</option>
+                        }
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="closeTime">وقت إغلاق التقييم</label>
+                      <input id="closeTime" name="closeTime" type="time" [(ngModel)]="classForm.closeTime" />
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button class="secondary-button" type="button" (click)="classFormOpen = false">إلغاء</button>
+                    <button class="primary-button compact-action" type="submit">حفظ</button>
+                  </div>
+                </form>
+              }
+
+              <div class="card-grid">
+                @for (classRoom of filteredClasses; track classRoom.id) {
+                  <article class="admin-card class-card">
+                    <div>
+                      <span>{{ classRoom.level }}</span>
+                      <h3>{{ classRoom.name }}</h3>
+                      <p>{{ data.teacherById(classRoom.teacherId)?.name || 'بدون معلم' }}</p>
+                      <p>{{ classStudentCount(classRoom.id) }} طالب · الإغلاق {{ data.formatTime12h(classRoom.closeTime) }}</p>
+                    </div>
+                    <div class="row-actions">
+                      <button type="button" (click)="expandedClassId = expandedClassId === classRoom.id ? '' : classRoom.id">
+                        الطلاب
+                      </button>
+                      <button type="button" (click)="openClassForm(classRoom)">تعديل</button>
+                    </div>
+                    @if (expandedClassId === classRoom.id) {
+                      <div class="student-mini-list">
+                        @for (student of data.studentsOfClass(classRoom.id); track student.id) {
+                          <div>{{ student.name }} <small>{{ student.grade }}</small></div>
+                        } @empty {
+                          <p class="muted">لا يوجد طلاب.</p>
+                        }
+                      </div>
+                    }
+                  </article>
+                } @empty {
+                  <p class="muted">لا توجد شعب مطابقة.</p>
+                }
+              </div>
+            } @else if (adminPage === 'students') {
+              <div class="admin-toolbar students-toolbar">
+                <input [(ngModel)]="studentQuery" placeholder="بحث بالاسم" aria-label="بحث بالاسم" />
+                <select [(ngModel)]="studentLevelFilter" (ngModelChange)="studentClassFilter = 'all'" aria-label="تصفية بالفئة">
+                  <option value="all">كل الفئات</option>
+                  @for (level of classLevels; track level) {
+                    <option [value]="level">{{ level }}</option>
+                  }
+                </select>
+                <select [(ngModel)]="studentClassFilter" aria-label="تصفية بالشعبة">
+                  <option value="all">كل الشعب</option>
+                  @for (classRoom of filteredStudentClasses; track classRoom.id) {
+                    <option [value]="classRoom.id">{{ classRoom.name }}</option>
+                  }
+                </select>
+                <button class="primary-button compact-action" type="button" (click)="openStudentForm()">إضافة طالب</button>
+              </div>
+
+              @if (studentFormOpen) {
+                <form class="admin-form" (submit)="saveStudent($event)">
+                  <h2>{{ editingStudent ? 'تعديل طالب' : 'إضافة طالب' }}</h2>
+                  <div class="student-photo-row">
+                    <div class="student-photo">
+                      @if (studentForm.photoPreview) {
+                        <img [src]="studentForm.photoPreview" alt="" />
+                      }
+                    </div>
+                    <label class="file-button">
+                      <input type="file" accept="image/*" (change)="pickStudentImage($event)" />
+                      صورة اختيارية
+                    </label>
+                  </div>
+                  <div class="form-grid">
+                    <div class="form-group">
+                      <label for="studentName">الاسم</label>
+                      <input id="studentName" name="studentName" [(ngModel)]="studentForm.name" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="studentGrade">الصف</label>
+                      <input id="studentGrade" name="studentGrade" [(ngModel)]="studentForm.grade" />
+                    </div>
+                    <div class="form-group">
+                      <label for="studentClass">الشعبة</label>
+                      <select id="studentClass" name="studentClass" [(ngModel)]="studentForm.classId" required>
+                        <option value="" disabled>اختر الشعبة</option>
+                        @for (classRoom of data.classes(); track classRoom.id) {
+                          <option [value]="classRoom.id">{{ classRoom.name }} — {{ classRoom.level }}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button class="secondary-button" type="button" (click)="studentFormOpen = false">إلغاء</button>
+                    <button class="primary-button compact-action" type="submit">حفظ</button>
+                  </div>
+                </form>
+              }
+
+              <div class="admin-table-wrap">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>الطالب</th>
+                      <th>الصف</th>
+                      <th>الشعبة</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (student of filteredStudents.slice(0, 50); track student.id) {
+                      <tr>
+                        <td>
+                          <div class="student-cell">
+                            <img [src]="student.photo" alt="" />
+                            <span>{{ student.name }}</span>
+                          </div>
+                        </td>
+                        <td>{{ student.grade || '—' }}</td>
+                        <td>{{ data.classById(student.classId)?.name || '—' }}</td>
+                        <td>
+                          <div class="row-actions">
+                            <button type="button" (click)="openStudentForm(student)">تعديل</button>
+                            <button class="danger" type="button" (click)="deleteStudent(student.id)">حذف</button>
+                          </div>
+                        </td>
+                      </tr>
+                    } @empty {
+                      <tr>
+                        <td colspan="4">لا يوجد طلاب مطابقون.</td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            } @else if (adminPage === 'standards') {
+              <div class="admin-toolbar">
+                <button class="secondary-button" type="button" (click)="addStandard()">إضافة</button>
+                <button class="primary-button compact-action" type="button" (click)="saveStandards()">حفظ التغييرات</button>
+              </div>
+
+              <div class="standards-list">
+                @for (standard of standardsFormList; track standard.id; let i = $index) {
+                  <article class="standard-edit-card">
+                    <div class="standard-icon">✦</div>
+                    <div class="form-group">
+                      <label [for]="'standardName' + i">اسم المعيار</label>
+                      <input
+                        [id]="'standardName' + i"
+                        [name]="'standardName' + i"
+                        [ngModel]="standard.name"
+                        (ngModelChange)="updateStandard(i, { name: $event })"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label [for]="'standardDescription' + i">الوصف</label>
+                      <textarea
+                        [id]="'standardDescription' + i"
+                        [name]="'standardDescription' + i"
+                        rows="1"
+                        [ngModel]="standard.description"
+                        (ngModelChange)="updateStandard(i, { description: $event })"
+                      ></textarea>
+                    </div>
+                    <div class="form-group compact-weight">
+                      <label [for]="'standardWeight' + i">الوزن</label>
+                      <input
+                        [id]="'standardWeight' + i"
+                        [name]="'standardWeight' + i"
+                        type="number"
+                        min="1"
+                        max="100"
+                        step="1"
+                        [ngModel]="standard.weight"
+                        (ngModelChange)="updateStandard(i, { weight: $event })"
+                      />
+                    </div>
+                    <button class="icon-danger" type="button" (click)="removeStandard(i)">حذف</button>
+                  </article>
+                } @empty {
+                  <section class="admin-panel">
+                    <p class="muted">لا توجد معايير بعد.</p>
+                  </section>
+                }
+              </div>
+            } @else if (adminPage === 'import') {
+              <div class="import-steps">
+                @for (step of importSteps; track step; let i = $index) {
+                  <div class="import-step" [class.active]="i === importStep" [class.done]="i < importStep">
+                    <span>{{ i + 1 }}</span>
+                    <div>
+                      <small>الخطوة {{ i + 1 }}</small>
+                      <strong>{{ step }}</strong>
+                    </div>
+                  </div>
+                }
+              </div>
+
+              <section class="import-wizard-panel">
+                @if (importStep === 0) {
+                  <div class="wizard-center">
+                    <div class="wizard-icon">XLSX</div>
+                    <h2>تنزيل قالب Excel</h2>
+                    <p class="muted">الأعمدة المطلوبة: name و classId و grade.</p>
+                    <button class="primary-button compact-action" type="button" (click)="downloadStudentTemplate()">تنزيل القالب</button>
+                  </div>
+                  <div class="compact-list">
+                    @for (classRoom of data.classes(); track classRoom.id) {
+                      <div class="compact-row">
+                        <span>{{ classRoom.name }}</span>
+                        <small dir="ltr">{{ classRoom.id }}</small>
+                      </div>
+                    }
+                  </div>
+                } @else if (importStep === 1) {
+                  <div class="wizard-center">
+                    <h2>ارفع ملف Excel</h2>
+                    <label class="upload-box">
+                      <input type="file" accept=".xlsx,.xls" (change)="parseImportFile($event)" />
+                      <span>اسحب الملف هنا، أو انقر للتصفح</span>
+                      <small>.xlsx أو .xls</small>
+                    </label>
+                  </div>
+                } @else if (importStep === 2) {
+                  <h2>التحقق من الصفوف</h2>
+                  <div class="import-summary">
+                    <article class="stat-card success-card">
+                      <span>صفوف صالحة</span>
+                      <strong>{{ validImportRows.length }}</strong>
+                    </article>
+                    <article class="stat-card danger-card">
+                      <span>صفوف غير صالحة</span>
+                      <strong>{{ invalidImportRows.length }}</strong>
+                    </article>
+                    <article class="stat-card">
+                      <span>إجمالي الصفوف</span>
+                      <strong>{{ importRows.length }}</strong>
+                    </article>
+                  </div>
+                  <div class="admin-table-wrap">
+                    <table class="admin-table">
+                      <thead>
+                        <tr>
+                          <th>السطر</th>
+                          <th>الاسم</th>
+                          <th>classId</th>
+                          <th>الصف</th>
+                          <th>الحالة</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (row of importRows; track row.row) {
+                          <tr>
+                            <td dir="ltr">{{ row.row }}</td>
+                            <td>{{ row.name || '—' }}</td>
+                            <td dir="ltr">{{ row.classId || '—' }}</td>
+                            <td>{{ row.grade || '—' }}</td>
+                            <td>
+                              @if (row.error) {
+                                <span class="status-badge error">{{ row.error }}</span>
+                              } @else {
+                                <span class="status-badge ok">صالح</span>
+                              }
+                            </td>
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                } @else if (importStep === 3) {
+                  <h2>معاينة البيانات</h2>
+                  <p class="muted">سيتم استيراد {{ validImportRows.length }} طالب، مع تجاهل {{ invalidImportRows.length }} صف غير صحيح.</p>
+                  <div class="import-summary">
+                    <article class="stat-card success-card">
+                      <span>جاهزة للاستيراد</span>
+                      <strong>{{ validImportRows.length }}</strong>
+                    </article>
+                    <article class="stat-card danger-card">
+                      <span>مرفوضة</span>
+                      <strong>{{ invalidImportRows.length }}</strong>
+                    </article>
+                    <article class="stat-card">
+                      <span>الشعب المتاحة</span>
+                      <strong>{{ data.classes().length }}</strong>
+                    </article>
+                  </div>
+                  <div class="admin-panel preview-note">
+                    الاستيراد سيضيف الطلاب الصالحين فقط، ويعتمد على name و classId و grade.
+                  </div>
+                } @else {
+                  <div class="wizard-center">
+                    <div class="success-icon">✓</div>
+                    <h2>اكتمل الاستيراد</h2>
+                    <p class="muted">تمت إضافة الطلاب بنجاح. سيتم نقلك إلى صفحة الطلاب الآن.</p>
+                  </div>
+                }
+              </section>
+
+              <div class="wizard-actions">
+                <button class="secondary-button" type="button" (click)="previousImportStep()" [disabled]="importStep === 0 || importBusy">السابق</button>
+                @if (importStep < 3) {
+                  <button class="primary-button compact-action" type="button" (click)="nextImportStep()" [disabled]="importBusy || (importStep === 1 && importRows.length === 0)">التالي</button>
+                } @else if (importStep === 3) {
+                  <button class="primary-button compact-action" type="button" (click)="importValidRows()" [disabled]="importBusy || validImportRows.length === 0">
+                    {{ importBusy ? 'جارٍ الاستيراد...' : 'استيراد الطلاب' }}
+                  </button>
+                } @else {
+                  <button class="secondary-button" type="button" (click)="resetImportWizard()">استيراد ملف جديد</button>
+                }
+              </div>
+            } @else if (adminPage === 'reports') {
+              <div class="reports-grid kpi-grid">
+                <article class="stat-card">
+                  <span>متوسط الأداء</span>
+                  <strong>{{ reportOverview.average }}٪</strong>
+                </article>
+                <article class="stat-card success-card">
+                  <span>تغطية التقييم</span>
+                  <strong>{{ reportOverview.coverage }}٪</strong>
+                </article>
+                <article class="stat-card">
+                  <span>عدد التقييمات</span>
+                  <strong>{{ reportOverview.ratings }}</strong>
+                </article>
+                <article class="stat-card">
+                  <span>فرسان منشورون</span>
+                  <strong>{{ reportOverview.published }}</strong>
+                </article>
+              </div>
+
+              <div class="reports-grid two-cols">
+                <section class="report-panel">
+                  <h2>تقدّم الشعب</h2>
+                  <div class="report-list">
+                    @for (item of classProgressReports; track item.classRoom.id) {
+                      <div class="report-row">
+                        <div class="report-row-head">
+                          <strong>{{ item.classRoom.name }}</strong>
+                          <span>{{ item.average }}٪</span>
+                        </div>
+                        <div class="report-meta">{{ item.completed }}/{{ item.studentCount }} مكتمل · تغطية {{ item.coverage }}٪</div>
+                        <div class="progress-track"><div [style.width.%]="reportBarWidth(item.average)"></div></div>
+                      </div>
+                    } @empty {
+                      <p class="muted">لا توجد شعب بعد.</p>
+                    }
+                  </div>
+                </section>
+
+                <section class="report-panel">
+                  <h2>أداء المعلمين</h2>
+                  <div class="report-list">
+                    @for (item of teacherProgressReports; track item.teacher.id) {
+                      <div class="report-row">
+                        <div class="report-row-head">
+                          <strong>{{ item.teacher.name }}</strong>
+                          <span>{{ item.coverage }}٪</span>
+                        </div>
+                        <div class="report-meta">{{ item.classCount }} شعب · {{ item.studentCount }} طالب · متوسط {{ item.average }}٪</div>
+                        <div class="progress-track"><div [style.width.%]="reportBarWidth(item.coverage)"></div></div>
+                      </div>
+                    } @empty {
+                      <p class="muted">لا يوجد معلمون بعد.</p>
+                    }
+                  </div>
+                </section>
+
+                <section class="report-panel">
+                  <h2>أداء المعايير</h2>
+                  <div class="report-list">
+                    @for (item of standardProgressReports; track item.standard.id) {
+                      <div class="report-row">
+                        <div class="report-row-head">
+                          <strong>{{ item.standard.name }}</strong>
+                          <span>{{ item.percent }}٪</span>
+                        </div>
+                        <div class="report-meta">متوسط {{ item.averageScore }}/5 · {{ item.count }} تقييم</div>
+                        <div class="progress-track"><div [style.width.%]="reportBarWidth(item.percent)"></div></div>
+                      </div>
+                    }
+                  </div>
+                </section>
+
+                <section class="report-panel">
+                  <h2>أفضل الطلاب</h2>
+                  <div class="leader-list">
+                    @for (item of topStudentReports; track item.student.id; let i = $index) {
+                      <div class="leader-row">
+                        <span class="rank">{{ i + 1 }}</span>
+                        <img [src]="item.student.photo" alt="" />
+                        <div>
+                          <strong>{{ item.student.name }}</strong>
+                          <small>{{ item.classRoom?.name || '—' }} · {{ item.ratings }} تقييم</small>
+                        </div>
+                        <b>{{ item.average }}٪</b>
+                      </div>
+                    } @empty {
+                      <p class="muted">لا توجد تقييمات كافية بعد.</p>
+                    }
+                  </div>
+                </section>
+              </div>
+
+              <section class="report-panel">
+                <h2>آخر التقييمات</h2>
+                <div class="admin-table-wrap">
+                  <table class="admin-table compact-table">
+                    <thead>
+                      <tr>
+                        <th>التاريخ</th>
+                        <th>الطالب</th>
+                        <th>الشعبة</th>
+                        <th>النسبة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (item of recentRatingReports; track item.rating.id) {
+                        <tr>
+                          <td dir="ltr">{{ item.rating.dayKey }}</td>
+                          <td>{{ item.rating.studentName }}</td>
+                          <td>{{ item.classRoom?.name || '—' }}</td>
+                          <td>{{ item.rating.percent }}٪</td>
+                        </tr>
+                      } @empty {
+                        <tr>
+                          <td colspan="4">لا توجد تقييمات بعد.</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            } @else {
+              <div class="admin-panel">
+                <h2>{{ adminTitle }}</h2>
+                <p class="muted">هذه الصفحة جاهزة داخل التنقل، وسنضيف تفاصيلها في الخطوة التالية.</p>
+              </div>
+            }
+          </section>
+        </section>
+      } @else if (isTeacherPage && auth.session().role === 'teacher') {
+        <section class="teacher-layout">
+          <aside class="teacher-sidebar">
+            <div class="admin-sidebar-title">لوحة المعلم</div>
+            <nav class="admin-nav" aria-label="صفحات المعلم">
+              <a [href]="appUrl('/teacher')" [class.active]="teacherPage === 'dashboard'">لوحة المعلم</a>
+              @for (classRoom of teacherClasses; track classRoom.id) {
+                <a [href]="appUrl('/teacher/class/' + classRoom.id)" [class.active]="teacherRouteClassId === classRoom.id">
+                  {{ classRoom.name }}
+                </a>
+              } @empty {
+                <span class="teacher-empty">لا توجد شعب مرتبطة بهذا الحساب</span>
+              }
+            </nav>
+            <a class="secondary-button" [href]="appUrl('/')">عرض ولي الأمر</a>
+            <button class="secondary-button" type="button" (click)="logout()">تسجيل الخروج</button>
+          </aside>
+
+          <section class="teacher-content">
+            <header class="teacher-topbar">
+              <span>لوحة المعلم</span>
+              <strong>{{ auth.session().teacher?.name || 'الشيخ' }}</strong>
+            </header>
+
+            @if (teacherNotice) {
+              <p class="inline-success">{{ teacherNotice }}</p>
+            }
+            @if (teacherError) {
+              <p class="inline-error">{{ teacherError }}</p>
+            }
+
+            @if (teacherPage === 'dashboard') {
+              <div class="admin-heading">
+                <div>
+                  <h1>أهلاً، {{ auth.session().teacher?.name || 'الشيخ' }}</h1>
+                  <p>لديك {{ teacherStats.classes }} شعب و{{ teacherStats.students }} طالب.</p>
+                </div>
+              </div>
+
+              <div class="stat-grid">
+                <article class="stat-card">
+                  <span>شعبي اليوم</span>
+                  <strong>{{ teacherStats.classes }}</strong>
+                </article>
+                <article class="stat-card">
+                  <span>تقييمات معلّقة</span>
+                  <strong>{{ teacherStats.pending }}</strong>
+                </article>
+                <article class="stat-card success-card">
+                  <span>تقييمات مكتملة</span>
+                  <strong>{{ teacherStats.completed }}</strong>
+                </article>
+                <article class="stat-card">
+                  <span>فرسان هذا الأسبوع</span>
+                  <strong>{{ teacherStats.classes }}</strong>
+                </article>
+              </div>
+
+              <div class="teacher-class-grid">
+                @for (classRoom of teacherClasses; track classRoom.id) {
+                  <article class="teacher-class-card">
+                    <div class="class-card-head">
+                      <div>
+                        <span>{{ classRoom.level }}</span>
+                        <h3>{{ classRoom.name }}</h3>
+                        <p>{{ classStudentCount(classRoom.id) }} طالب</p>
+                      </div>
+                      <div class="class-icon">⌂</div>
+                    </div>
+                    <div class="progress-block">
+                      <div>
+                        <span>التقييم اليوم</span>
+                        <strong>{{ completedRatingsForClass(classRoom.id) }}/{{ classStudentCount(classRoom.id) }}</strong>
+                      </div>
+                      <div class="progress-track">
+                        <div [style.width.%]="classStudentCount(classRoom.id) === 0 ? 0 : (completedRatingsForClass(classRoom.id) / classStudentCount(classRoom.id)) * 100"></div>
+                      </div>
+                    </div>
+                    <a class="primary-button compact-action link-button" [href]="appUrl('/teacher/class/' + classRoom.id)">فتح الشعبة</a>
+                  </article>
+                }
+              </div>
+            } @else if (teacherPage === 'class') {
+              @if (teacherClass; as classRoom) {
+                <div class="admin-heading">
+                  <div>
+                    <h1>{{ classRoom.name }}</h1>
+                    <p>{{ data.teacherById(classRoom.teacherId)?.name || auth.session().teacher?.name || '—' }} · {{ classRoom.level }}</p>
+                  </div>
+                </div>
+
+                <section class="teacher-status-card">
+                  <div>
+                    <span>حالة اليوم</span>
+                    <h2>
+                      {{ evalWindowStateForClass.state === 'vacation' ? 'غير محتسب' : evalWindowStateForClass.state === 'closed' ? 'مُغلق' : evalWindowStateForClass.state === 'before' ? 'لم يبدأ' : 'جارٍ التقييم' }}
+                    </h2>
+                    <p>{{ teacherClassStudents.length }} طالب · {{ completedRatingsForClass(classRoom.id) }} مقيّم</p>
+                  </div>
+                  <div class="countdown-box">
+                    @if (evalWindowStateForClass.state === 'open') {
+                      <small>الوقت المتبقي حتى {{ data.formatTime12h(classRoom.closeTime) }}</small>
+                      <strong dir="ltr">{{ timeUntil(evalWindowStateForClass.end) }}</strong>
+                    } @else if (evalWindowStateForClass.state === 'before') {
+                      <small>يبدأ التقييم بعد</small>
+                      <strong dir="ltr">{{ timeUntil(evalWindowStateForClass.start) }}</strong>
+                    } @else {
+                      <small>انتهى وقت التقييم</small>
+                      <strong>—</strong>
+                    }
+                  </div>
+                  @if (evalWindowStateForClass.state === 'closed' || evalWindowStateForClass.state === 'vacation') {
+                    <button class="secondary-button" type="button" disabled>تم إغلاق التقييم لهذا اليوم</button>
+                  } @else {
+                    <a class="primary-button compact-action link-button" [href]="appUrl('/teacher/evaluate/' + classRoom.id)">ابدأ تقييم اليوم</a>
+                  }
+                </section>
+
+                <section class="admin-panel">
+                  <div class="panel-title-row">
+                    <h2>طلاب الشعبة</h2>
+                    <button class="primary-button compact-action" type="button" (click)="openTeacherStudentForm()">إضافة طالب</button>
+                  </div>
+
+                  @if (teacherStudentFormOpen) {
+                    <form class="admin-form embedded-form" (submit)="saveTeacherStudent($event)">
+                      <h2>{{ editingTeacherStudent ? 'تعديل الطالب' : 'إضافة طالب جديد' }}</h2>
+                      <div class="student-photo-row">
+                        <div class="student-photo">
+                          @if (teacherStudentForm.photoPreview) {
+                            <img [src]="teacherStudentForm.photoPreview" alt="" />
+                          }
+                        </div>
+                        <label class="file-button">
+                          <input type="file" accept="image/*" (change)="pickTeacherStudentImage($event)" />
+                          صورة اختيارية
+                        </label>
+                      </div>
+                      <div class="form-grid">
+                        <div class="form-group">
+                          <label for="teacherStudentName">الاسم</label>
+                          <input id="teacherStudentName" name="teacherStudentName" [(ngModel)]="teacherStudentForm.name" required />
+                        </div>
+                        <div class="form-group">
+                          <label for="teacherStudentGrade">الصف</label>
+                          <input id="teacherStudentGrade" name="teacherStudentGrade" [(ngModel)]="teacherStudentForm.grade" />
+                        </div>
+                      </div>
+                      <div class="form-actions">
+                        <button class="secondary-button" type="button" (click)="teacherStudentFormOpen = false">إلغاء</button>
+                        <button class="primary-button compact-action" type="submit">حفظ</button>
+                      </div>
+                    </form>
+                  }
+
+                  <div class="teacher-student-grid">
+                    @for (student of teacherClassStudents; track student.id) {
+                      <article class="teacher-student-card">
+                        <img [src]="student.photo" alt="" />
+                        <div>
+                          <strong>{{ student.name }}</strong>
+                          <span>{{ student.grade || (student.overallPercent + '٪ إجمالي') }}</span>
+                        </div>
+                        <button type="button" (click)="openTeacherStudentForm(student)">تعديل</button>
+                      </article>
+                    }
+                  </div>
+                </section>
+              } @else {
+                <section class="selection-card message-card">
+                  <h2>الشعبة غير موجودة</h2>
+                </section>
+              }
+            } @else if (teacherPage === 'evaluate') {
+              @if (teacherClass; as classRoom) {
+                @if (evalStudent; as student) {
+                  <div class="eval-shell">
+                    <div class="eval-header">
+                      <div>
+                        <span>التقييم اليومي</span>
+                        <h1>{{ classRoom.name }}</h1>
+                        <p>نافذة التقييم: من ٢:٠٠ م حتى {{ data.formatTime12h(classRoom.closeTime) }}</p>
+                      </div>
+                      <div class="countdown-box compact">
+                        @if (evalWindowStateForClass.state === 'open') {
+                          <small>الإغلاق بعد</small>
+                          <strong dir="ltr">{{ timeUntil(evalWindowStateForClass.end) }}</strong>
+                        } @else if (evalWindowStateForClass.state === 'before') {
+                          <small>الفتح بعد</small>
+                          <strong dir="ltr">{{ timeUntil(evalWindowStateForClass.start) }}</strong>
+                        }
+                      </div>
+                    </div>
+
+                    @if (evalWindowStateForClass.state !== 'open') {
+                      <div class="eval-alert">
+                        {{ evalWindowStateForClass.state === 'vacation' ? 'اليوم إجازة لهذه الفئة — لا يوجد تقييم' : evalWindowStateForClass.state === 'before' ? 'لم تبدأ نافذة التقييم بعد — تبدأ الساعة ٢:٠٠ م' : 'تم إغلاق التقييم لهذا اليوم' }}
+                      </div>
+                    }
+
+                    <section class="eval-progress-card">
+                      <div>
+                        <div class="progress-label">
+                          <span>اكتمال التقييم</span>
+                          <strong>{{ evalCompleteCount }}/{{ evalRoster.length }} · {{ evalCompletePercent }}٪</strong>
+                        </div>
+                        <div class="progress-track">
+                          <div [style.width.%]="evalCompletePercent"></div>
+                        </div>
+                      </div>
+                      <span class="save-state">
+                        {{ evalSaving === 'saving' ? 'جارٍ الحفظ…' : evalSaving === 'saved' ? 'تم الحفظ تلقائيًا' : 'حفظ تلقائي بعد كل تغيير' }}
+                      </span>
+                    </section>
+
+                    <section class="eval-card">
+                      <div class="eval-student">
+                        <div class="eval-photo">
+                          <img [src]="student.photo" alt="" />
+                        </div>
+                        <strong>{{ student.name }}</strong>
+                        <span>{{ data.scoreToPercent(evalScores[student.id] || student.todayScores || {}) }}٪ اليوم</span>
+                      </div>
+                      <div class="standard-list">
+                        @for (standard of data.standardsForScoring(); track standard.id) {
+                          <div class="standard-row">
+                            <div>
+                              <strong>{{ standard.name }}</strong>
+                              <span>{{ standard.description }}</span>
+                            </div>
+                            <div class="star-row" role="group" [attr.aria-label]="standard.name">
+                              @for (star of scoreStars((evalScores[student.id] || student.todayScores || {})[standard.id] || 0); track star.value) {
+                                <button type="button" [class.filled]="star.filled" [disabled]="!canEvaluate" (click)="setEvaluationScore(standard.id, star.value)">★</button>
+                              }
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    </section>
+
+                    <div class="eval-actions">
+                      <button class="secondary-button" type="button" (click)="previousEvalStudent()" [disabled]="evalIndex === 0">السابق</button>
+                      <span>طالب {{ evalIndex + 1 }} من {{ evalRoster.length }}</span>
+                      <button class="primary-button compact-action" type="button" (click)="nextEvalStudent()">
+                        {{ evalIndex === evalRoster.length - 1 ? 'إنهاء' : 'التالي' }}
+                      </button>
+                    </div>
+
+                    <div class="eval-strip">
+                      @for (item of evalRoster; track item.id; let i = $index) {
+                        <button type="button" [class.active]="i === evalIndex" [class.complete]="evalStudentComplete(item)" (click)="evalIndex = i">
+                          <img [src]="item.photo" alt="" />
+                        </button>
+                      }
+                    </div>
+
+                    <div class="eval-return">
+                      <a [href]="appUrl('/teacher/class/' + classRoom.id)">العودة للشعبة</a>
+                    </div>
+                  </div>
+                } @else {
+                  <section class="selection-card message-card">
+                    <h2>لا يوجد طلاب في هذه الشعبة</h2>
+                  </section>
+                }
+              } @else {
+                <section class="selection-card message-card">
+                  <h2>الشعبة غير موجودة</h2>
+                </section>
+              }
+            }
+          </section>
+        </section>
+      } @else {
+        <section class="selection-card message-card">
+          <h2>غير مصرح</h2>
+          <p>يجب تسجيل الدخول بحساب لديه الصلاحية المناسبة.</p>
+          <a class="primary-button link-button" [href]="appUrl('/login')">تسجيل الدخول</a>
+        </section>
+      }
+    </main>
+  } @else if (isRevealPage) {
+    <main class="shell reveal-main">
+      <section class="reveal-title">
+        <div class="pill">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m12 3 1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5Z" />
+            <path d="M19 15h2" />
+            <path d="M20 14v2" />
+          </svg>
+          {{ revealClass?.name || 'الشعبة' }}
+        </div>
+        <h1>{{ revealTitle }}</h1>
+      </section>
+
+      @if (!data.ready()) {
+        <div class="silent-loading" aria-hidden="true"></div>
+      } @else if (revealKnight; as knight) {
+        <section class="knight-wrap">
+          <article class="knight-card">
+            <div class="card-pattern" aria-hidden="true"></div>
+            <div class="knight-content">
+              <div class="knight-top">
+                <div class="brand-mini">
+                  <span class="brand-mark small">
+                    <svg viewBox="0 0 40 40">
+                      <path d="M20 4 L28 12 L28 32 L12 32 L12 12 Z" fill="none" stroke="oklch(0.88 0.11 90)" stroke-width="1.8" />
+                      <path d="M20 14 L23 20 L29 20 L24 24 L26 30 L20 26 L14 30 L16 24 L11 20 L17 20 Z" fill="oklch(0.95 0.02 200)" opacity="0.9" />
+                    </svg>
+                  </span>
+                </div>
+                <div>
+                  <h2>{{ revealTitle }}</h2>
+                  <p>{{ data.formatArabicDate(knight.day) }}</p>
+                </div>
+              </div>
+
+              <div class="photo-ring">
+                @if (knight.student.photo) {
+                  <img [src]="knight.student.photo" [alt]="knight.student.name" />
+                } @else {
+                  <div class="photo-fallback">{{ knight.student.name.slice(0, 1) }}</div>
+                }
+                <span>{{ knight.percent }}٪</span>
+              </div>
+
+              <h3>{{ knight.student.name }}</h3>
+              <p class="class-name">{{ revealClass?.name }}</p>
+
+              <div class="knight-score-list">
+                @for (standard of data.standardsForScoring(); track standard.id) {
+                  <div class="knight-score-row">
+                    <div>
+                      <span>{{ standard.name }}</span>
+                      <strong>{{ arabicNumber(knight.student.todayScores[standard.id] || 0) }}/٥</strong>
+                    </div>
+                    <div class="knight-score-track">
+                      <div [style.width.%]="standardScorePercent(knight.student.todayScores, standard.id)"></div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </article>
+          <p class="published-date">يوم التتويج: {{ data.formatArabicDate(knight.day) }}</p>
+        </section>
+      } @else {
+        <section class="selection-card message-card">
+          <h2>لا يوجد فارس منشور بعد</h2>
+        </section>
+      }
+
+      @if (revealWindowState.state === 'vacation') {
+        <section class="selection-card status-card">
+          <p>اليوم إجازة لهذه الفئة — سيُعلن الفارس الجديد بعد انتهاء أول يوم دراسي قادم.</p>
+        </section>
+      }
+
+      @if (isPublishing && revealWindowState.state !== 'vacation') {
+        <section class="selection-card status-card">
+          <div class="card-pattern" aria-hidden="true"></div>
+          <div class="card-content">
+            <p>
+              سيتم تحديث {{ revealTitle }} بعد إغلاق تقييم اليوم
+              @if (revealClass?.closeTime) {
+                (الساعة {{ data.formatTime12h(revealClass!.closeTime) }})
+              }
+            </p>
+          </div>
+        </section>
+      }
+    </main>
+  } @else {
+    <main class="shell hero">
+      <section class="hero-copy">
+        <h1>فارس اليوم <span>وفارس الأسبوع</span></h1>
+        <p>
+          نظامٌ يوميّ لتكريم أبنائكم في مركز الفرقان القرآني، بناءً على معايير التميّز. اختر شعبة
+          ابنك وتابع إعلان فارس اليوم بعد الساعة الثامنة مساءً.
+        </p>
+        <blockquote>﴿ ثُمَّ أَوْرَثْنَا الْكِتَابَ الَّذِينَ اصْطَفَيْنَا مِنْ عِبَادِنَا ﴾</blockquote>
+      </section>
+
+      <section class="selection-card" aria-labelledby="selection-title">
+        <div class="card-pattern" aria-hidden="true"></div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <h2 id="selection-title">اختر نوع الفارس والشعبة</h2>
+          </div>
+
+          @if (data.error()) {
+            <p class="inline-error">تعذر تحميل البيانات. تحقق من الاتصال أو الصلاحيات.</p>
+          }
+
+          <fieldset class="radio-group" aria-labelledby="knightModeLabel">
+            <legend id="knightModeLabel">نوع الفارس</legend>
+            <label>
+              <input type="radio" name="knightMode" value="day" [(ngModel)]="selectedKnightMode" />
+              <span>فارس اليوم</span>
+            </label>
+            <label>
+              <input type="radio" name="knightMode" value="week" [(ngModel)]="selectedKnightMode" />
+              <span>فارس الأسبوع</span>
+            </label>
+          </fieldset>
+
+          <div class="form-group home-select-group">
+            <label for="classSelect">الشعبة</label>
+            <div class="home-select-wrap">
+              <select id="classSelect" [(ngModel)]="selectedClassId" [disabled]="!data.ready()">
+                <option value="" disabled>{{ data.ready() ? 'اختر الشعبة' : 'جارٍ تحميل الشعب...' }}</option>
+                @for (classRoom of data.classes(); track classRoom.id) {
+                  <option [value]="classRoom.id">{{ classRoom.name }} — {{ classRoom.level }}</option>
+                }
+              </select>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+          </div>
+
+          <button class="primary-button" type="button" [disabled]="!selectedClassId" (click)="openReveal()">
+            عرض {{ selectedKnightMode === 'week' ? 'فارس الأسبوع' : 'فارس اليوم' }}
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m12 19-7-7 7-7" />
+              <path d="M19 12H5" />
+            </svg>
+          </button>
+        </div>
+      </section>
+    </main>
+  }
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div>© مركز الفرقان القرآني — مرج الحمام، عمّان</div>
+      <div>للتواصل: <span dir="ltr">0799456785</span></div>
+    </div>
+  </footer>
+</div>
