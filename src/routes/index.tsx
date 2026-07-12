@@ -2,13 +2,6 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
 import { BrandLogo } from "@/components/brand-logo";
 import { IslamicPatternBg, ArchOrnament } from "@/components/islamic-pattern";
 import { useFirestoreData } from "@/lib/firestore-data";
@@ -59,7 +52,7 @@ function LandingPage() {
         </section>
 
         <Card className="relative overflow-hidden border-0 p-6 shadow-elev sm:p-8">
-          <div className="absolute inset-0 pattern-islamic opacity-40" />
+          <div className="pointer-events-none absolute inset-0 pattern-islamic opacity-40" />
           <div className="relative">
             <div className="mb-4 flex items-center gap-2">
               <Users className="h-5 w-5 text-primary" />
@@ -69,18 +62,20 @@ function LandingPage() {
             <div className="space-y-4">
               <div>
                 <label className="mb-1.5 block text-sm font-medium">الشعبة</label>
-                <Select value={classId} onValueChange={setClassId}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="اختر الشعبة" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {classes.map((c) => (
-                      <SelectItem key={c.id} value={c.id}>
-                        {c.name} — {c.level}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <select
+                  value={classId ?? ""}
+                  onChange={(event) => setClassId(event.target.value || undefined)}
+                  className="flex h-10 w-full cursor-pointer appearance-auto rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm outline-none transition-colors focus:border-ring focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <option value="" disabled>
+                    اختر الشعبة
+                  </option>
+                  {classes.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name} — {c.level}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <Button
