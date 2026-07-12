@@ -1,12 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { BrandLogo } from "@/components/brand-logo";
 import { IslamicPatternBg, ArchOrnament } from "@/components/islamic-pattern";
 import { ArrowRight, ShieldCheck } from "lucide-react";
-import { signInAndResolve, useAuthSession } from "@/lib/auth-session";
+import { signInAndResolve } from "@/lib/auth-session";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
@@ -16,15 +16,7 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const nav = useNavigate();
-  const session = useAuthSession();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (!session.ready || !session.role) return;
-    nav({ to: session.role === "admin" ? "/admin" : "/teacher" });
-  }, [nav, session.ready, session.role]);
 
   return (
     <div className="relative min-h-screen overflow-hidden pattern-islamic">
@@ -68,9 +60,13 @@ function LoginPage() {
               className="mt-6 space-y-4"
               onSubmit={async (e) => {
                 e.preventDefault();
+                const form = new FormData(e.currentTarget);
+                const email = String(form.get("email") ?? "").trim();
+                const password = String(form.get("password") ?? "");
+
                 setLoading(true);
                 try {
-                  const resolved = await signInAndResolve(email.trim(), password);
+                  const resolved = await signInAndResolve(email, password);
                   nav({ to: resolved.role === "admin" ? "/admin" : "/teacher" });
                 } catch {
                   toast.error("البريد الإلكتروني أو كلمة المرور غير صحيحة");
@@ -83,12 +79,12 @@ function LoginPage() {
                 <Label htmlFor="e">البريد الإلكتروني</Label>
                 <input
                   id="e"
+                  name="email"
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
                   dir="ltr"
                   autoComplete="email"
+                  required
                   className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base shadow-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                 />
               </div>
@@ -96,11 +92,11 @@ function LoginPage() {
                 <Label htmlFor="p">كلمة المرور</Label>
                 <input
                   id="p"
+                  name="password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   autoComplete="current-password"
+                  required
                   className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base shadow-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                 />
               </div>
