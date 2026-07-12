@@ -2,7 +2,6 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { BrandLogo } from "@/components/brand-logo";
 import { IslamicPatternBg, ArchOrnament } from "@/components/islamic-pattern";
@@ -82,23 +81,27 @@ function LoginPage() {
             >
               <div>
                 <Label htmlFor="e">البريد الإلكتروني</Label>
-                <Input
+                <input
                   id="e"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
                   dir="ltr"
+                  autoComplete="email"
+                  className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base shadow-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                 />
               </div>
               <div>
                 <Label htmlFor="p">كلمة المرور</Label>
-                <Input
+                <input
                   id="p"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
+                  autoComplete="current-password"
+                  className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base shadow-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
                 />
               </div>
               <Button type="submit" className="w-full" size="lg" disabled={loading}>
